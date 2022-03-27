@@ -5,6 +5,8 @@ import {
 } from "@chakra-ui/react";
 import { Dict } from "@chakra-ui/utils";
 import { mode } from "@chakra-ui/theme-tools";
+import textStyles from "./textStyles";
+import colors from "./colors";
 
 const theme = extendTheme(
   {
@@ -23,17 +25,8 @@ const theme = extendTheme(
       initialColorMode: "light",
       useSystemColorMode: false,
     },
-    colors: {
-      brand: {
-        100: "#adbaeb",
-        200: "#f4f6fd",
-        300: "#020417",
-        400: "#9d9ab4",
-        500: "#373b5e",
-        600: "#2643c4",
-        700: "#a056c5",
-      },
-    },
+    textStyles,
+    colors,
   },
   withDefaultColorScheme({ colorScheme: "brand" })
 );
