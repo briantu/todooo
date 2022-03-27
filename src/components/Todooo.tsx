@@ -11,6 +11,7 @@ const Todooo = () => {
           alignItems="flex-start"
           bg="brand.200"
           borderRadius={20}
+          boxShadow="xl"
         >
           <Heading>Welcome Back!</Heading>
           <Task />

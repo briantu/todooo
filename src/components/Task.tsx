@@ -1,25 +1,28 @@
 import { useState, useEffect } from "react";
 import { HStack, Circle, Text, useBoolean } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
+import styles from "../styles/Task.module.css";
+
+const defaultTextDecor = {
+  textDecoration: "none",
+  textDecorationThickness: "2px",
+};
+const defaultCircleDecor = {
+  bg: "transparent",
+  opacity: 1,
+};
 
 const Task = () => {
-  const defaultTextDecor = {
-    textDecoration: "none",
-    textDecorationThickness: "2px",
-  };
-  const [textDecor, setTextDecor] = useState(defaultTextDecor);
-  const [circleBg, setCircleBg] = useState("transparent");
+  const [textClassName, setTextClassName] = useState("");
+  const [circleDecor, setCircleDecor] = useState(defaultCircleDecor);
   const [isComplete, setIsComplete] = useBoolean(false);
   useEffect(() => {
     if (isComplete) {
-      setTextDecor({
-        ...defaultTextDecor,
-        textDecoration: "line-through",
-      });
-      setCircleBg("brand.600");
+      setCircleDecor({ bg: "brand.600", opacity: 0.3 });
+      setTextClassName(styles.strike);
     } else {
-      setTextDecor(defaultTextDecor);
-      setCircleBg("transparent");
+      setCircleDecor(defaultCircleDecor);
+      setTextClassName("");
     }
   }, [isComplete]);
 
@@ -35,20 +38,15 @@ const Task = () => {
     >
       <Circle
         size="30px"
-        bg={circleBg}
         borderWidth="3px"
-        borderColor="brand.600"
+        borderColor="#1f5ebe"
         onClick={setIsComplete.toggle}
+        sx={circleDecor}
       >
         {isComplete && <CheckIcon w="14px" h="14px" color="white" />}
       </Circle>
-      <Text
-        textStyle="body-regular"
-        sx={textDecor}
-        _before={{ content: '"\u00a0"' }}
-        _after={{ content: '"\u00a0"' }}
-      >
-        Pay for rent
+      <Text textStyle="body-regular" className={textClassName}>
+        Daily meeting with team
       </Text>
     </HStack>
   );
