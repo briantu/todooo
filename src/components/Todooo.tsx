@@ -1,18 +1,20 @@
-import { Container, Flex, Stack, Heading } from "@chakra-ui/react";
+import { Container, Flex, VStack, Heading } from "@chakra-ui/react";
+import Task from "./Task";
 
 const Todooo = () => {
   return (
     <Container maxW="container.xl" p={0}>
       <Flex h="100vh" py={10}>
-        <Stack
+        <VStack
           w="full"
           p={8}
-          // alignItems="flex-start"
+          alignItems="flex-start"
           bg="brand.200"
           borderRadius={20}
         >
           <Heading>Welcome Back!</Heading>
-        </Stack>
+          <Task />
+        </VStack>
       </Flex>
     </Container>
   );
