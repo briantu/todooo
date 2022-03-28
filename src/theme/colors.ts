@@ -11,7 +11,7 @@ const colors = {
   text: {
     default: "#333333",
     white: "#FFFFFF",
-    gray: "#868686",
+    gray: "#939db3",
   },
 };
 

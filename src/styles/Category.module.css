@@ -1,0 +1,19 @@
+@keyframes progressBar {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.shadow {
+  -webkit-box-shadow: 0px 1px 1px #de1dde;
+  -moz-box-shadow: 0px 1px 1px #de1dde;
+  box-shadow: 0px 1px 1px #de1dde;
+}
+
+.progress {
+  animation: progressBar 0.8s ease-in-out;
+  animation-fill-mode: both;
+}

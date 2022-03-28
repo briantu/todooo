@@ -27,7 +27,19 @@ const theme = extendTheme(
     },
     textStyles,
     colors,
+    components: {
+      Progress: {
+        variants: {
+          pink: {
+            filledTrack: {
+              bg: "#da00e6",
+            },
+          },
+        },
+      },
+    },
   },
+
   withDefaultColorScheme({ colorScheme: "brand" })
 );
 

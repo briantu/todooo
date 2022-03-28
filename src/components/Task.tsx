@@ -3,10 +3,6 @@ import { HStack, Circle, Text, useBoolean } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 import styles from "../styles/Task.module.css";
 
-const defaultTextDecor = {
-  textDecoration: "none",
-  textDecorationThickness: "2px",
-};
 const defaultCircleDecor = {
   bg: "transparent",
   opacity: 1,
@@ -31,8 +27,8 @@ const Task = () => {
       w="full"
       px={6}
       py={5}
-      alignItems="center"
       spacing={4}
+      alignItems="center"
       bg="white"
       borderRadius={20}
     >

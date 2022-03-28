@@ -1,4 +1,5 @@
-import { Container, Flex, VStack, Heading } from "@chakra-ui/react";
+import { Container, Flex, VStack, Heading, Text } from "@chakra-ui/react";
+import Category from "./Category";
 import Task from "./Task";
 
 const Todooo = () => {
@@ -13,7 +14,10 @@ const Todooo = () => {
           borderRadius={20}
           boxShadow="xl"
         >
-          <Heading>Welcome Back!</Heading>
+          <Text textStyle="heading">Welcome Back!</Text>
+          <Text textStyle="body-heading">Categories</Text>
+          <Category />
+          <Text textStyle="body-heading">Today's tasks</Text>
           <Task />
         </VStack>
       </Flex>
