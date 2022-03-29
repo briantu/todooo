@@ -4,7 +4,7 @@ import Task from "./Task";
 
 const Todooo = () => {
   return (
-    <Container maxW="container.xl" p={0}>
+    <Container maxW="container.xl" p={0} position="absolute">
       <Flex h="100vh" py={10}>
         <VStack
           w="full"

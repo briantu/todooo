@@ -29,12 +29,12 @@ const Category = () => {
             className={styles.progress}
           />
         </Box>
-        <Box w="60%" bg="transparent">
+        <Box w="calc(60% - 4px)" bg="transparent">
           <Divider
             h={0}
             bg="transparent"
             borderRadius="md"
-            boxShadow="1px 0px 10px 2px rgba(218, 0, 230, 0.5)"
+            boxShadow="2px 0px 10px 2px rgba(218, 0, 230, 0.5)"
             className={styles.progress}
           />
         </Box>

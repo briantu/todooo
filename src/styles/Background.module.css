@@ -1,0 +1,7 @@
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  filter: invert(73%) sepia(63%) saturate(6435%) hue-rotate(207deg)
+    brightness(88%) contrast(89%) opacity(50%);
+}
