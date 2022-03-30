@@ -1,27 +1,16 @@
 import { useEffect, useState } from "react";
 import { VStack, Text, Progress, Box, Divider } from "@chakra-ui/react";
 import styles from "../styles/Category.module.css";
+import useOnPageLoad from "../utils/useOnPageLoad";
 
 const Category = () => {
   const [progressClassName, setProgressClassName] = useState("");
   const [progressValue, setProgressValue] = useState(0);
 
-  // This will run one time after the component mounts
-  useEffect(() => {
-    const onPageLoad = () => {
-      setProgressClassName(styles.progress);
-      setProgressValue(60);
-    };
-
-    // Check if the page has already loaded
-    if (document.readyState === "complete") {
-      onPageLoad();
-    } else {
-      window.addEventListener("load", onPageLoad);
-      // Remove the event listener when component unmounts
-      return () => window.removeEventListener("load", onPageLoad);
-    }
-  }, []);
+  useOnPageLoad(() => {
+    setProgressClassName(styles.progress);
+    setProgressValue(60);
+  });
 
   return (
     <VStack

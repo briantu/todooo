@@ -1,5 +1,5 @@
-import { useState, useLayoutEffect, useEffect, useRef } from "react";
-import { HStack, Circle, Text, Input, Box, useBoolean } from "@chakra-ui/react";
+import { useState, useEffect, useRef } from "react";
+import { HStack, Circle, Input, Box, useBoolean } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 import styles from "../styles/Task.module.css";
 import useIsomorphicLayoutEffect from "../utils/useIsomorphicLayoutEffect";
@@ -18,7 +18,7 @@ const Task = ({
   completed: boolean;
   color: string;
 }) => {
-  const [textClassName, setTextClassName] = useState("");
+  const [strikethroughClassName, setStrikethroughClassName] = useState("");
   const [textWidth, setTextWidth] = useState(0);
   const [text, setText] = useState(description);
   const [circleDecor, setCircleDecor] = useState(defaultCircleDecor);
@@ -30,10 +30,10 @@ const Task = ({
   useEffect(() => {
     if (isComplete) {
       setCircleDecor({ bg: color, opacity: 0.3 });
-      setTextClassName(styles.strike);
+      setStrikethroughClassName(styles.strike);
     } else {
       setCircleDecor(defaultCircleDecor);
-      setTextClassName("");
+      setStrikethroughClassName("");
     }
   }, [isComplete]);
 
@@ -90,7 +90,7 @@ const Task = ({
           }}
         />
         <Box
-          className={textClassName}
+          className={strikethroughClassName}
           w={`${textWidth + 8}px`}
           maxW="full"
           ml={2}
