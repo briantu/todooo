@@ -23,7 +23,6 @@ const Task = ({
   const [text, setText] = useState(description);
   const [circleDecor, setCircleDecor] = useState(defaultCircleDecor);
   const [isComplete, setIsComplete] = useBoolean(completed);
-
   const elemDiv = useRef<HTMLDivElement>(null);
   const elemInput = useRef<HTMLInputElement>(null);
 
@@ -90,7 +89,7 @@ const Task = ({
         />
         <Box
           className={strikethroughClassName}
-          w={`${textWidth + 8}px`}
+          w={`${!textWidth ? 0 : textWidth + 8}px`}
           maxW="full"
           ml={2}
         ></Box>
