@@ -10,9 +10,25 @@
   position: absolute;
   top: 50%;
 }
-/* .strike::before {
-  content: "\00a0\00a0";
-} */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .strike::after {
   content: "";
   display: inline-block;
@@ -34,4 +50,24 @@
   visibility: hidden;
   position: absolute;
   overflow: auto;
+}
+
+.trashcanFadeIn {
+  filter: invert(67%) sepia(26%) saturate(224%) hue-rotate(183deg)
+    brightness(89%) contrast(87%);
+  opacity: 1;
+  animation-name: fadeIn;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 150ms;
+}
+
+.trashcanFadeOut {
+  filter: invert(67%) sepia(26%) saturate(224%) hue-rotate(183deg)
+    brightness(89%) contrast(87%);
+  opacity: 0;
+  animation-name: fadeOut;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 150ms;
 }

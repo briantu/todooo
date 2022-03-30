@@ -1,5 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import { HStack, Circle, Input, Box, useBoolean } from "@chakra-ui/react";
+import {
+  Flex,
+  Spacer,
+  Box,
+  Circle,
+  Input,
+  Image,
+  useBoolean,
+} from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 import styles from "../styles/Task.module.css";
 import useIsomorphicLayoutEffect from "../utils/useIsomorphicLayoutEffect";
@@ -18,21 +26,19 @@ const Task = ({
   completed: boolean;
   color: string;
 }) => {
-  const [strikethroughClassName, setStrikethroughClassName] = useState("");
+  const [isComplete, setIsComplete] = useBoolean(completed);
+  const [isHover, setIsHover] = useBoolean(false);
   const [textWidth, setTextWidth] = useState(0);
   const [text, setText] = useState(description);
   const [circleDecor, setCircleDecor] = useState(defaultCircleDecor);
-  const [isComplete, setIsComplete] = useBoolean(completed);
   const elemDiv = useRef<HTMLDivElement>(null);
   const elemInput = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (isComplete) {
       setCircleDecor({ bg: color, opacity: 0.3 });
-      setStrikethroughClassName(styles.strike);
     } else {
       setCircleDecor(defaultCircleDecor);
-      setStrikethroughClassName("");
     }
   }, [isComplete]);
 
@@ -56,21 +62,23 @@ const Task = ({
   };
 
   return (
-    <HStack
+    <Flex
       w="full"
       h="68px"
       px={6}
       py={5}
-      spacing={3}
       alignItems="center"
       bg="white"
       borderRadius={20}
+      onMouseEnter={setIsHover.on}
+      onMouseLeave={setIsHover.off}
     >
       <Circle
         size="28px"
         borderWidth="3px"
         borderColor={color}
         onClick={setIsComplete.toggle}
+        mr={3}
         sx={circleDecor}
       >
         {isComplete && <CheckIcon w="14px" h="14px" color="white" />}
@@ -86,18 +94,25 @@ const Task = ({
           onInput={() => {
             updateText();
           }}
+          _focus={{ outline: "none", "box-shadow": "none" }}
         />
         <Box
-          className={strikethroughClassName}
+          className={isComplete ? styles.strike : ""}
           w={`${!textWidth ? 0 : textWidth + 8}px`}
-          maxW="full"
+          maxW="calc(100% - 8px)"
           ml={2}
         ></Box>
         <Box ref={elemDiv} className={styles.hidden} textStyle="body-regular">
           {description}
         </Box>
       </Box>
-    </HStack>
+      <Spacer />
+      <Image
+        src="/icons/icons8-trash-can.svg"
+        h="22px"
+        className={isHover ? styles.trashcanFadeIn : styles.trashcanFadeOut}
+      />
+    </Flex>
   );
 };
 
