@@ -51,7 +51,6 @@ const Task = ({
     if (elemDiv && elemDiv.current && elemInput && elemInput.current) {
       const inputValue = elemInput.current.value;
       elemDiv.current.innerHTML = inputValue.replaceAll(" ", "&nbsp;");
-      console.log(inputValue);
       setText(inputValue);
       setTextWidth(elemDiv.current.clientWidth);
     }
@@ -60,7 +59,7 @@ const Task = ({
   return (
     <HStack
       w="full"
-      h="70px"
+      h="68px"
       px={6}
       py={5}
       spacing={3}
@@ -69,7 +68,7 @@ const Task = ({
       borderRadius={20}
     >
       <Circle
-        size="30px"
+        size="28px"
         borderWidth="3px"
         borderColor={color}
         onClick={setIsComplete.toggle}
@@ -80,8 +79,8 @@ const Task = ({
       <Box w="full" position="relative">
         <Input
           ref={elemInput}
-          textStyle="body-regular"
           value={text}
+          textStyle="body-regular"
           fontSize="18px"
           px={2}
           border="none"

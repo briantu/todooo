@@ -27,6 +27,9 @@ const theme = extendTheme(
     },
     textStyles,
     colors,
+    shadows: {
+      category: "0 12px 15px -3px rgba(169, 184, 2397, 0.12)",
+    },
     components: {
       Progress: {
         variants: {

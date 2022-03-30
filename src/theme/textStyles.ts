@@ -1,25 +1,25 @@
 const textStyles = {
   heading: {
     fontFamily: "Raleway",
-    fontSize: "36px",
+    fontSize: "40px",
     fontWeight: "bold",
-    lineHeight: "150%",
+    lineHeight: "100%",
     color: "text.default",
   },
   subheading: {
     fontFamily: "Inter",
-    fontSize: "20px",
-    fontWeight: "bold",
+    fontSize: "21px",
+    fontWeight: "semibold",
     lineHeight: "150%",
     color: "text.default",
   },
   "body-heading": {
     fontFamily: "Inter",
-    fontSize: "14px",
-    fontWeight: "semibold",
-    lineHeight: "130%",
+    fontSize: "13px",
+    fontWeight: "normal",
+    lineHeight: "150%",
     textTransform: "uppercase",
-    letterSpacing: "0.75px",
+    letterSpacing: "0.7px",
     color: "text.gray",
   },
   "body-regular": {
