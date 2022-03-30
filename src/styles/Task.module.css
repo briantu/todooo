@@ -7,17 +7,18 @@
   }
 }
 .strike {
-  position: relative;
+  position: absolute;
+  top: 50%;
 }
-.strike::before {
+/* .strike::before {
   content: "\00a0\00a0";
-}
+} */
 .strike::after {
   content: "";
   display: inline-block;
   position: absolute;
   top: 50%;
-  left: 5px;
+  left: -4px;
   width: 100%;
   height: 2px;
   background: #333;
@@ -26,4 +27,11 @@
   animation-timing-function: cubic-bezier(0, 0, 0.3, 1);
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+}
+
+.hidden {
+  width: auto;
+  visibility: hidden;
+  position: absolute;
+  overflow: auto;
 }

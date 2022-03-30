@@ -24,7 +24,7 @@ const Background = () => {
   useEffect(() => {
     const scene = document.getElementById("scene");
     const parallaxInstance = new Parallax(scene, { relativeInput: true });
-  });
+  }, []);
 
   return (
     <Box id="scene" w="full" position="absolute">

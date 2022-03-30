@@ -18,7 +18,11 @@ const Todooo = () => {
           <Text textStyle="body-heading">Categories</Text>
           <Category />
           <Text textStyle="body-heading">Today's tasks</Text>
-          <Task />
+          <Task
+            description="Daily meeting with the team"
+            completed={false}
+            color="#1f5ebe"
+          />
         </VStack>
       </Flex>
     </Container>
