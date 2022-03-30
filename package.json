@@ -15,6 +15,8 @@
     "@emotion/styled": "^11",
     "@fontsource/inter": "^4.5.7",
     "@fontsource/raleway": "^4.5.5",
+    "dexie": "^3.2.1",
+    "dexie-react-hooks": "^1.1.1",
     "framer-motion": "^6",
     "next": "12.1.1",
     "parallax-js": "^3.1.0",
