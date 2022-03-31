@@ -13,6 +13,9 @@ const colors = {
     white: "#FFFFFF",
     gray: "#939db3",
   },
+  hover: {
+    button: "rgba(55, 53, 47, 0.08)",
+  },
 };
 
 export default colors;

@@ -3,13 +3,10 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { Container, Flex, VStack, Text } from "@chakra-ui/react";
 import Category from "./Category";
 import Task from "./Task";
-import { db, Task as TaskDTO } from "../db/db";
-import { createTask } from "../db/service";
+import { db } from "../db/db";
+import CreateTask from "./CreateTask";
 
 const Todooo = () => {
-  useEffect(() => {
-    // createTask("test task", 1, true);
-  }, []);
   const tasks = useLiveQuery(async () => {
     return await db.tasks.toArray();
   });
@@ -52,6 +49,12 @@ const Todooo = () => {
                 color="#1f5ebe"
               />
             ))}
+            <CreateTask
+              categories={[
+                { id: 1, name: "Business", color: "#1f5ebe" },
+                { id: 2, name: "Personal", color: "#da00e6" },
+              ]}
+            />
           </VStack>
         </VStack>
       </Flex>

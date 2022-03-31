@@ -40,6 +40,15 @@ const theme = extendTheme(
           },
         },
       },
+      Button: {
+        variants: {
+          dropdown: {
+            _hover: { bg: "hover.button" },
+            // _expanded: { bg: "hover.button" },
+            _focus: { boxShadow: "none" },
+          },
+        },
+      },
     },
   },
 

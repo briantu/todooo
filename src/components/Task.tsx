@@ -94,7 +94,7 @@ const Task = ({
           onInput={() => {
             updateText();
           }}
-          _focus={{ outline: "none", "box-shadow": "none" }}
+          _focus={{ outline: "none", boxShadow: "none" }}
         />
         <Box
           className={isComplete ? styles.strike : ""}
