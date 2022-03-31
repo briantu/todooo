@@ -11,7 +11,7 @@ import {
 import CategoryCard from "./CategoryCard";
 import TaskRow from "./TaskRow";
 import CreateTaskRow from "./CreateTaskRow";
-import AddButton from "./AddButton";
+import CreateTaskButton from "./CreateTaskButton";
 
 import { db } from "../db/db";
 
@@ -68,7 +68,7 @@ const Todooo = () => {
               setIsCreating={setIsCreatingTask}
             />
             <Box px={2} py="2px">
-              <AddButton
+              <CreateTaskButton
                 isCreating={isCreatingTask}
                 setIsCreating={setIsCreatingTask}
               />

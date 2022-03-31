@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 
-const AddButton = ({
+const CreateTaskButton = ({
   isCreating,
   setIsCreating,
 }: {
@@ -32,4 +32,4 @@ const AddButton = ({
   );
 };
 
-export default AddButton;
+export default CreateTaskButton;
