@@ -42,9 +42,23 @@ const theme = extendTheme(
       },
       Button: {
         variants: {
-          dropdown: {
+          transparent: {
+            lineHeight: "150%",
             _hover: { bg: "hover.button" },
             // _expanded: { bg: "hover.button" },
+            _focus: { boxShadow: "none" },
+          },
+          "new-task": {
+            // h: "auto",
+            // py: "7px",
+            pr: "3px",
+            pl: "9px",
+            fontWeight: "medium",
+            fontSize: "16px",
+            lineHeight: "150%",
+            bg: "hover.button",
+            color: "rgba(55, 53, 47, 0.7)",
+            _hover: { bg: "rgba(55, 53, 47, 0.13)" },
             _focus: { boxShadow: "none" },
           },
         },

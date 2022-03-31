@@ -1,12 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
-import { Container, Flex, VStack, Text } from "@chakra-ui/react";
-import Category from "./Category";
-import Task from "./Task";
+import {
+  Container,
+  Flex,
+  VStack,
+  Box,
+  Text,
+  useBoolean,
+} from "@chakra-ui/react";
+import CategoryCard from "./CategoryCard";
+import TaskRow from "./TaskRow";
+import CreateTaskRow from "./CreateTaskRow";
+import AddButton from "./AddButton";
+
 import { db } from "../db/db";
-import CreateTask from "./CreateTask";
 
 const Todooo = () => {
+  const [isCreatingTask, setIsCreatingTask] = useBoolean(false);
   const tasks = useLiveQuery(async () => {
     return await db.tasks.toArray();
   });
@@ -30,31 +40,39 @@ const Todooo = () => {
             <Text textStyle="body-heading" mb={2}>
               Categories
             </Text>
-            <Category />
+            <CategoryCard />
           </VStack>
           <VStack w="full" spacing="5px" alignItems="flex-start">
             <Text textStyle="body-heading" mb={2}>
               Today's tasks
             </Text>
-            <Task
+            <TaskRow
               description="Daily meeting with the team"
               completed={false}
               color="#1f5ebe"
             />
             {tasks?.map((task) => (
-              <Task
+              <TaskRow
                 key={task.id}
                 description={task.description}
                 completed={task.isComplete}
                 color="#1f5ebe"
               />
             ))}
-            <CreateTask
+            <CreateTaskRow
               categories={[
                 { id: 1, name: "Business", color: "#1f5ebe" },
                 { id: 2, name: "Personal", color: "#da00e6" },
               ]}
+              isCreating={isCreatingTask}
+              setIsCreating={setIsCreatingTask}
             />
+            <Box px={2} py="2px">
+              <AddButton
+                isCreating={isCreatingTask}
+                setIsCreating={setIsCreatingTask}
+              />
+            </Box>
           </VStack>
         </VStack>
       </Flex>

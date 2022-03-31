@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Flex,
   Box,
@@ -13,15 +13,37 @@ import {
   MenuItem,
   useBoolean,
 } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 
 import { Category } from "../db/db";
 import { createTask } from "../db/service";
 
-const CreateTask = ({ categories }: { categories: Category[] }) => {
-  const [isHover, setIsHover] = useBoolean(false);
+type CreateTasRowProps = {
+  categories: Category[];
+  isCreating: boolean;
+  setIsCreating: {
+    readonly on: () => void;
+    readonly off: () => void;
+    readonly toggle: () => void;
+  };
+};
+
+const CreateTaskRow = ({
+  categories,
+  isCreating,
+  setIsCreating,
+}: CreateTasRowProps) => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const elemInput = useRef<HTMLInputElement>(null);
+  const resetTask = () => {
+    setSelectedCategory(categories[0]);
+    elemInput.current!.value = "";
+  };
+  useEffect(() => {
+    if (!isCreating) {
+      resetTask();
+    }
+  }, [isCreating]);
 
   return (
     <Flex
@@ -32,19 +54,17 @@ const CreateTask = ({ categories }: { categories: Category[] }) => {
       alignItems="center"
       bg="white"
       borderRadius={20}
-      onMouseEnter={setIsHover.on}
-      onMouseLeave={setIsHover.off}
+      display={isCreating ? "flex" : "none"}
     >
       <Menu>
         <MenuButton
           as={Button}
-          bg="transparent"
           py="0px"
           pl="6px"
-          pr="4px"
+          pr="2px"
           ml="-6px"
-          mr="4px"
-          variant="dropdown"
+          mr="3px"
+          variant="transparent"
         >
           <HStack spacing="1px" alignItems="center">
             <Circle
@@ -52,7 +72,7 @@ const CreateTask = ({ categories }: { categories: Category[] }) => {
               borderWidth="3px"
               borderColor={selectedCategory.color}
             />
-            <ChevronDownIcon color="gray.600" w="14px" />
+            <ChevronDownIcon color="rgba(55, 53, 47, 0.9)" w="14px" />
           </HStack>
         </MenuButton>
         <MenuList minW="175px">
@@ -72,24 +92,29 @@ const CreateTask = ({ categories }: { categories: Category[] }) => {
           ))}
         </MenuList>
       </Menu>
-
-      <Box w="full" position="relative">
+      <Box flexGrow={1}>
         <Input
           ref={elemInput}
           textStyle="body-regular"
           fontSize="18px"
           px={0}
           border="none"
-          placeholder="Create a task"
+          placeholder="What needs to be done?"
           _focus={{ outline: "none", boxShadow: "none" }}
-          onBlur={() => {
-            createTask(elemInput.current!.value, selectedCategory.id!, false);
-            elemInput.current!.value = "";
-          }}
         />
       </Box>
+      <Button
+        ml="auto"
+        variant="new-task"
+        onClick={() => {
+          createTask(elemInput.current!.value, selectedCategory.id!, false);
+          setIsCreating.off();
+        }}
+      >
+        New Task
+        <ChevronUpIcon boxSize={6} ml="1px" color="rgba(55, 53, 47, 0.7)" />
+      </Button>
     </Flex>
   );
 };
-
-export default CreateTask;
+export default CreateTaskRow;

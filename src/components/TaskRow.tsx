@@ -9,7 +9,7 @@ import {
   useBoolean,
 } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
-import styles from "../styles/Task.module.css";
+import styles from "../styles/TaskRow.module.css";
 import useIsomorphicLayoutEffect from "../utils/useIsomorphicLayoutEffect";
 
 const defaultCircleDecor = {
@@ -17,7 +17,7 @@ const defaultCircleDecor = {
   opacity: 1,
 };
 
-const Task = ({
+const TaskRow = ({
   description,
   completed,
   color,
@@ -83,7 +83,7 @@ const Task = ({
       >
         {isComplete && <CheckIcon w="14px" h="14px" color="white" />}
       </Circle>
-      <Box w="full" position="relative">
+      <Box position="relative" flexGrow={1}>
         <Input
           ref={elemInput}
           value={text}
@@ -106,14 +106,14 @@ const Task = ({
           {description}
         </Box>
       </Box>
-      <Spacer />
       <Image
         src="/icons/icons8-trash-can.svg"
         h="22px"
         className={isHover ? styles.trashcanFadeIn : styles.trashcanFadeOut}
+        ml="auto"
       />
     </Flex>
   );
 };
 
-export default Task;
+export default TaskRow;

@@ -16,7 +16,7 @@ const textStyles = {
   "body-heading": {
     fontFamily: "Inter",
     fontSize: "13px",
-    fontWeight: "normal",
+    fontWeight: "medium",
     lineHeight: "150%",
     textTransform: "uppercase",
     letterSpacing: "0.7px",
@@ -25,14 +25,14 @@ const textStyles = {
   "body-regular": {
     fontFamily: "Inter",
     fontSize: "18px",
-    fontWeight: "normal",
+    fontWeight: "medium",
     lineHeight: "150%",
     color: "text.default",
   },
   caption: {
     fontFamily: "Inter",
     fontSize: "14px",
-    fontWeight: "normal",
+    fontWeight: "medium",
     lineHeight: "150%",
     color: "text.gray",
   },
