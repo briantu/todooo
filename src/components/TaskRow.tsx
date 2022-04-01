@@ -1,16 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import {
-  Flex,
-  Spacer,
-  Box,
-  Circle,
-  Input,
-  Image,
-  useBoolean,
-} from "@chakra-ui/react";
+import { Flex, Box, Circle, Input, Image, useBoolean } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 import styles from "../styles/TaskRow.module.css";
 import useIsomorphicLayoutEffect from "../utils/useIsomorphicLayoutEffect";
+import { hexToCSSFilter } from "hex-to-css-filter";
 
 const defaultCircleDecor = {
   bg: "transparent",
@@ -108,9 +101,12 @@ const TaskRow = ({
       </Box>
       <Image
         src="/icons/icons8-trash-can.svg"
-        h="22px"
         className={isHover ? styles.trashcanFadeIn : styles.trashcanFadeOut}
+        h="22px"
         ml="auto"
+        filter={hexToCSSFilter("#7985a0").filter}
+        transition="0.3s"
+        _hover={{ opacity: 1 }}
       />
     </Flex>
   );

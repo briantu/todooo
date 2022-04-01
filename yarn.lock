@@ -3066,6 +3066,13 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+hex-to-css-filter@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/hex-to-css-filter/-/hex-to-css-filter-5.4.0.tgz#7dcc5b18cf93ecdabf5b6967108a6bc11496d216"
+  integrity sha512-hqdJXxsUebj+JDxaz4Lkw+ZkUcYIr4UJlcGYV6waFfQqfUqc2yCY6OE0gAPJtZAZ8vA8AKvkdyq6pvgHBdhdCA==
+  dependencies:
+    tslib "^2.3.0"
+
 hey-listen@^1.0.8:
   version "1.0.8"
   resolved "https://registry.npmjs.org/hey-listen/-/hey-listen-1.0.8.tgz"
@@ -4051,7 +4058,7 @@ tslib@^1.0.0, tslib@^1.8.1, tslib@^1.9.3:
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.3, tslib@^2.1.0:
+tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0:
   version "2.3.1"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.3.1.tgz"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
