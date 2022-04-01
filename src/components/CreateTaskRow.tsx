@@ -11,14 +11,13 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  useBoolean,
 } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 
 import { Category } from "../db/db";
 import { createTask } from "../db/service";
 
-type CreateTasRowProps = {
+type CreateTaskRowProps = {
   categories: Category[];
   isCreating: boolean;
   setIsCreating: {
@@ -32,7 +31,7 @@ const CreateTaskRow = ({
   categories,
   isCreating,
   setIsCreating,
-}: CreateTasRowProps) => {
+}: CreateTaskRowProps) => {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const elemInput = useRef<HTMLInputElement>(null);
   const resetTask = () => {

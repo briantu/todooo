@@ -46,17 +46,19 @@ const Todooo = () => {
             <Text textStyle="body-heading" mb={2}>
               Today's tasks
             </Text>
-            <TaskRow
-              description="Daily meeting with the team"
-              completed={false}
-              color="#1f5ebe"
-            />
             {tasks?.map((task) => (
               <TaskRow
                 key={task.id}
-                description={task.description}
-                completed={task.isComplete}
-                color="#1f5ebe"
+                task={{
+                  id: task.id,
+                  description: task.description,
+                  isComplete: task.isComplete,
+                  category: {
+                    id: 1,
+                    name: "Business",
+                    color: "#1f5ebe",
+                  },
+                }}
               />
             ))}
             <CreateTaskRow

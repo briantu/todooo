@@ -13,6 +13,14 @@ export const createTask = async (
     });
     return id;
   } catch (err) {
-    return null;
+    console.log(err);
+  }
+};
+
+export const deleteTask = async (id: number) => {
+  try {
+    await db.tasks.delete(id);
+  } catch (err) {
+    console.log(err);
   }
 };

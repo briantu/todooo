@@ -13,6 +13,13 @@ export interface Task {
   categoryId: number;
 }
 
+export interface TaskWithCategory {
+  id?: number;
+  description: string;
+  isComplete: boolean;
+  category: Category;
+}
+
 export class MySubClassedDexie extends Dexie {
   categories!: Table<Category>;
   tasks!: Table<Task>;

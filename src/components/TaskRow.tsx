@@ -1,59 +1,54 @@
 import { useState, useEffect, useRef } from "react";
 import { Flex, Box, Circle, Input, Image, useBoolean } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
-import styles from "../styles/TaskRow.module.css";
-import useIsomorphicLayoutEffect from "../utils/useIsomorphicLayoutEffect";
 import { hexToCSSFilter } from "hex-to-css-filter";
+
+import styles from "../styles/TaskRow.module.css";
+
+import { TaskWithCategory } from "../db/db";
+import { deleteTask } from "../db/service";
 
 const defaultCircleDecor = {
   bg: "transparent",
   opacity: 1,
 };
 
-const TaskRow = ({
-  description,
-  completed,
-  color,
-}: {
-  description: string;
-  completed: boolean;
-  color: string;
-}) => {
-  const [isComplete, setIsComplete] = useBoolean(completed);
+const TaskRow = ({ task }: { task: TaskWithCategory }) => {
+  const [isComplete, setIsComplete] = useBoolean(task.isComplete);
   const [isHover, setIsHover] = useBoolean(false);
   const [textWidth, setTextWidth] = useState(0);
-  const [text, setText] = useState(description);
+  const [text, setText] = useState(task.description);
   const [circleDecor, setCircleDecor] = useState(defaultCircleDecor);
   const elemDiv = useRef<HTMLDivElement>(null);
-  const elemInput = useRef<HTMLInputElement>(null);
+
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      updateText(task.description);
+    }, 1000);
+  }, [elemDiv]);
 
   useEffect(() => {
     if (isComplete) {
-      setCircleDecor({ bg: color, opacity: 0.3 });
+      setCircleDecor({ bg: task.category.color, opacity: 0.3 });
     } else {
       setCircleDecor(defaultCircleDecor);
     }
   }, [isComplete]);
 
-  useIsomorphicLayoutEffect(() => {
+  const updateText = (text: string) => {
     if (elemDiv.current) {
-      setTimeout(() => {
-        if (elemDiv.current) {
-          setTextWidth(elemDiv.current.clientWidth);
-        }
-      }, 1000);
-    }
-  }, []);
-
-  const updateText = () => {
-    if (elemDiv && elemDiv.current && elemInput && elemInput.current) {
-      const inputValue = elemInput.current.value;
-      elemDiv.current.innerHTML = inputValue.replaceAll(" ", "&nbsp;");
-      setText(inputValue);
+      elemDiv.current.innerHTML = text.replaceAll(" ", "&nbsp;");
+      setText(text);
       setTextWidth(elemDiv.current.clientWidth);
     }
   };
-
+  // workaround to fix this error https://github.com/vercel/next.js/issues/7322
+  if (!hasMounted) return null;
   return (
     <Flex
       w="full"
@@ -69,7 +64,7 @@ const TaskRow = ({
       <Circle
         size="28px"
         borderWidth="3px"
-        borderColor={color}
+        borderColor={task.category.color}
         onClick={setIsComplete.toggle}
         mr={3}
         sx={circleDecor}
@@ -78,14 +73,13 @@ const TaskRow = ({
       </Circle>
       <Box position="relative" flexGrow={1}>
         <Input
-          ref={elemInput}
           value={text}
           textStyle="body-regular"
           fontSize="18px"
           px={2}
           border="none"
-          onInput={() => {
-            updateText();
+          onInput={(e) => {
+            updateText((e.target as HTMLInputElement).value);
           }}
           _focus={{ outline: "none", boxShadow: "none" }}
         />
@@ -96,7 +90,7 @@ const TaskRow = ({
           ml={2}
         ></Box>
         <Box ref={elemDiv} className={styles.hidden} textStyle="body-regular">
-          {description}
+          {task.description}
         </Box>
       </Box>
       <Image
@@ -107,6 +101,7 @@ const TaskRow = ({
         filter={hexToCSSFilter("#a5aec0").filter}
         transition="filter 0.3s"
         _hover={{ filter: hexToCSSFilter("#7985a0").filter }}
+        onClick={() => deleteTask(task.id!)}
       />
     </Flex>
   );
