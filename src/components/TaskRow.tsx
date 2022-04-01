@@ -104,9 +104,9 @@ const TaskRow = ({
         className={isHover ? styles.trashcanFadeIn : styles.trashcanFadeOut}
         h="22px"
         ml="auto"
-        filter={hexToCSSFilter("#7985a0").filter}
-        transition="0.3s"
-        _hover={{ opacity: 1 }}
+        filter={hexToCSSFilter("#a5aec0").filter}
+        transition="filter 0.3s"
+        _hover={{ filter: hexToCSSFilter("#7985a0").filter }}
       />
     </Flex>
   );
