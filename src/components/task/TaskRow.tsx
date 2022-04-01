@@ -6,7 +6,7 @@ import { hexToCSSFilter } from "hex-to-css-filter";
 import styles from "../../styles/TaskRow.module.css";
 
 import { TaskWithCategory } from "../../db/db";
-import { deleteTask } from "../../db/service";
+import { updateTask, deleteTask } from "../../db/service";
 
 const defaultCircleDecor = {
   bg: "transparent",
@@ -38,6 +38,7 @@ const TaskRow = ({ task }: { task: TaskWithCategory }) => {
     } else {
       setCircleDecor(defaultCircleDecor);
     }
+    updateTask(task.id!, text, isComplete);
   }, [isComplete]);
 
   const updateText = (text: string) => {
@@ -65,9 +66,9 @@ const TaskRow = ({ task }: { task: TaskWithCategory }) => {
         size="28px"
         borderWidth="3px"
         borderColor={task.category.color}
-        onClick={setIsComplete.toggle}
         mr={3}
         sx={circleDecor}
+        onClick={setIsComplete.toggle}
       >
         {isComplete && <CheckIcon w="14px" h="14px" color="white" />}
       </Circle>
@@ -78,10 +79,13 @@ const TaskRow = ({ task }: { task: TaskWithCategory }) => {
           fontSize="18px"
           px={2}
           border="none"
+          _focus={{ outline: "none", boxShadow: "none" }}
           onInput={(e) => {
             updateText((e.target as HTMLInputElement).value);
           }}
-          _focus={{ outline: "none", boxShadow: "none" }}
+          onBlur={() => {
+            updateTask(task.id!, text, isComplete);
+          }}
         />
         <Box
           className={isComplete ? styles.strike : ""}

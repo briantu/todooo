@@ -15,14 +15,14 @@ const CreateTaskButton = ({
   return (
     <Button
       variant="transparent"
-      leftIcon={
-        isCreating ? <CloseIcon boxSize="14px" /> : <AddIcon boxSize="14px" />
-      }
       h="auto"
       px="12px"
       py="7px"
       color="text.gray"
       fontWeight="medium"
+      leftIcon={
+        isCreating ? <CloseIcon boxSize="14px" /> : <AddIcon boxSize="14px" />
+      }
       onClick={() => {
         setIsCreating.toggle();
       }}
