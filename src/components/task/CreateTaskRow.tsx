@@ -14,8 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 
-import { Category } from "../db/db";
-import { createTask } from "../db/service";
+import { Category } from "../../db/db";
+import { createTask } from "../../db/service";
 
 type CreateTaskRowProps = {
   categories: Category[];

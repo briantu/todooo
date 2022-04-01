@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { VStack, Text, Progress, Box, Divider } from "@chakra-ui/react";
-import styles from "../styles/CategoryCard.module.css";
-import useOnPageLoad from "../utils/useOnPageLoad";
+import styles from "../../styles/CategoryCard.module.css";
+import useOnPageLoad from "../../utils/useOnPageLoad";
 
 const Category = () => {
   const [progressClassName, setProgressClassName] = useState("");

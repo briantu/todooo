@@ -8,10 +8,10 @@ import {
   Text,
   useBoolean,
 } from "@chakra-ui/react";
-import CategoryCard from "./CategoryCard";
-import TaskRow from "./TaskRow";
-import CreateTaskRow from "./CreateTaskRow";
-import CreateTaskButton from "./CreateTaskButton";
+import CategoryCard from "./category/CategoryCard";
+import TaskRow from "./task/TaskRow";
+import CreateTaskRow from "./task/CreateTaskRow";
+import CreateTaskButton from "./task/CreateTaskButton";
 
 import { db } from "../db/db";
 

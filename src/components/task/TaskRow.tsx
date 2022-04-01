@@ -3,10 +3,10 @@ import { Flex, Box, Circle, Input, Image, useBoolean } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 import { hexToCSSFilter } from "hex-to-css-filter";
 
-import styles from "../styles/TaskRow.module.css";
+import styles from "../../styles/TaskRow.module.css";
 
-import { TaskWithCategory } from "../db/db";
-import { deleteTask } from "../db/service";
+import { TaskWithCategory } from "../../db/db";
+import { deleteTask } from "../../db/service";
 
 const defaultCircleDecor = {
   bg: "transparent",
