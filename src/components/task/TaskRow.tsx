@@ -68,6 +68,7 @@ const TaskRow = ({ task }: { task: TaskWithCategory }) => {
         borderColor={task.category.color}
         mr={3}
         sx={circleDecor}
+        cursor="pointer"
         onClick={setIsComplete.toggle}
       >
         {isComplete && <CheckIcon w="14px" h="14px" color="white" />}
@@ -99,12 +100,13 @@ const TaskRow = ({ task }: { task: TaskWithCategory }) => {
       </Box>
       <Image
         src="/icons/icons8-trash-can.svg"
-        className={isHover ? styles.trashcanFadeIn : styles.trashcanFadeOut}
+        className={isHover ? styles.iconFadeIn : styles.iconFadeOut}
         h="22px"
         ml="auto"
         filter={hexToCSSFilter("#a5aec0").filter}
         transition="filter 0.3s"
         _hover={{ filter: hexToCSSFilter("#7985a0").filter }}
+        cursor="pointer"
         onClick={() => deleteTask(task.id!)}
       />
     </Flex>

@@ -52,7 +52,7 @@
   overflow: auto;
 }
 
-.trashcanFadeIn {
+.iconFadeIn {
   opacity: 1;
   animation-name: fadeIn;
   animation-iteration-count: 1;
@@ -60,7 +60,7 @@
   animation-duration: 150ms;
 }
 
-.trashcanFadeOut {
+.iconFadeOut {
   opacity: 0;
   animation-name: fadeOut;
   animation-iteration-count: 1;

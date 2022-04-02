@@ -4,6 +4,7 @@ import {
   Container,
   Flex,
   VStack,
+  HStack,
   Box,
   Text,
   useBoolean,
@@ -14,6 +15,7 @@ import CreateTaskRow from "./task/CreateTaskRow";
 import CreateTaskButton from "./task/CreateTaskButton";
 
 import { db } from "../db/db";
+import CreateCategoryButton from "./category/CreateCategoryButton";
 
 const Todooo = () => {
   const [isCreatingTask, setIsCreatingTask] = useBoolean(false);
@@ -40,7 +42,10 @@ const Todooo = () => {
             <Text textStyle="body-heading" mb={2}>
               Categories
             </Text>
-            <CategoryCard />
+            <HStack>
+              <CategoryCard />
+              <CreateCategoryButton />
+            </HStack>
           </VStack>
           <VStack w="full" spacing="5px" alignItems="flex-start">
             <Text textStyle="body-heading" mb={2}>
