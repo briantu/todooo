@@ -33,3 +33,7 @@ export const createCategory = async (name: string, color: string) => {
     color,
   });
 };
+
+export const deleteCategory = async (id: number) => {
+  await db.categories.delete(id);
+};

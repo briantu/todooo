@@ -103,10 +103,10 @@ const TaskRow = ({ task }: { task: TaskWithCategory }) => {
         className={isHover ? styles.iconFadeIn : styles.iconFadeOut}
         h="22px"
         ml="auto"
+        cursor="pointer"
         filter={hexToCSSFilter("#a5aec0").filter}
         transition="filter 0.3s"
         _hover={{ filter: hexToCSSFilter("#7985a0").filter }}
-        cursor="pointer"
         onClick={() => deleteTask(task.id!)}
       />
     </Flex>

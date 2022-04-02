@@ -10,7 +10,6 @@ import {
   Divider,
   useBoolean,
 } from "@chakra-ui/react";
-import { CloseIcon } from "@chakra-ui/icons";
 
 import { hexToCSSFilter } from "hex-to-css-filter";
 import styles from "../../styles/CategoryCard.module.css";
@@ -18,13 +17,16 @@ import taskStyles from "../../styles/TaskRow.module.css";
 
 import useOnPageLoad from "../../utils/useOnPageLoad";
 import { Category } from "../../db/db";
+import { deleteCategory } from "../../db/service";
 
 const CategoryCard = ({
   category,
   numTasks,
+  numCategories,
 }: {
   category: Category;
   numTasks: number;
+  numCategories: number;
 }) => {
   const [isHover, setIsHover] = useBoolean(false);
   const [name, setName] = useState(category.name);
@@ -108,7 +110,7 @@ const CategoryCard = ({
         right={0}
         px={3}
         py={2}
-        spacing="8px"
+        spacing="6px"
         className={isHover ? taskStyles.iconFadeIn : taskStyles.iconFadeOut}
       >
         <Image
@@ -119,12 +121,15 @@ const CategoryCard = ({
           transition="filter 0.3s"
           _hover={{ filter: hexToCSSFilter("#7985a0").filter }}
         />
-        <CloseIcon
-          boxSize="11px"
+        <Image
+          src="/icons/icons8-trash-can.svg"
+          h="17px"
           cursor="pointer"
-          color="#a5aec0"
+          display={numCategories <= 1 ? "none" : "inline-block"}
+          filter={hexToCSSFilter("#a5aec0").filter}
           transition="filter 0.3s"
           _hover={{ filter: hexToCSSFilter("#7985a0").filter }}
+          onClick={() => deleteCategory(category.id!)}
         />
       </HStack>
     </VStack>

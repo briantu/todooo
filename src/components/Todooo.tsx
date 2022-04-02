@@ -16,6 +16,7 @@ import CreateTaskButton from "./task/CreateTaskButton";
 
 import { db } from "../db/db";
 import CreateCategoryButton from "./category/CreateCategoryButton";
+import { createCategory } from "../db/service";
 
 const Todooo = () => {
   const [isCreatingTask, setIsCreatingTask] = useBoolean(false);
@@ -25,6 +26,15 @@ const Todooo = () => {
   const categories = useLiveQuery(async () => {
     return await db.categories.toArray();
   });
+  const [numCategories, setNumCategories] = useState(0);
+
+  useEffect(() => {
+    if (categories) {
+      const n = categories.length;
+      if (n === 0) createCategory("New Category", "red");
+      setNumCategories(categories.length);
+    }
+  }, [categories]);
 
   return (
     <Container maxW="container.xl" p={0} position="absolute">
@@ -46,15 +56,12 @@ const Todooo = () => {
               Categories
             </Text>
             <HStack spacing={2}>
-              <CategoryCard
-                category={{ id: 1, name: "Business", color: "red" }}
-                numTasks={40}
-              />
               {categories?.map((category) => (
                 <CategoryCard
                   key={category.id}
                   category={category}
                   numTasks={40}
+                  numCategories={numCategories}
                 />
               ))}
               <CreateCategoryButton />
