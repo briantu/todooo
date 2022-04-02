@@ -22,6 +22,9 @@ const Todooo = () => {
   const tasks = useLiveQuery(async () => {
     return await db.tasks.toArray();
   });
+  const categories = useLiveQuery(async () => {
+    return await db.categories.toArray();
+  });
 
   return (
     <Container maxW="container.xl" p={0} position="absolute">
@@ -42,8 +45,18 @@ const Todooo = () => {
             <Text textStyle="body-heading" mb={2}>
               Categories
             </Text>
-            <HStack>
-              <CategoryCard />
+            <HStack spacing={2}>
+              <CategoryCard
+                category={{ id: 1, name: "Business", color: "red" }}
+                numTasks={40}
+              />
+              {categories?.map((category) => (
+                <CategoryCard
+                  key={category.id}
+                  category={category}
+                  numTasks={40}
+                />
+              ))}
               <CreateCategoryButton />
             </HStack>
           </VStack>

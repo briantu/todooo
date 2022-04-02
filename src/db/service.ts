@@ -5,16 +5,11 @@ export const createTask = async (
   categoryId: number,
   isComplete: boolean
 ) => {
-  try {
-    const id = await db.tasks.add({
-      description,
-      categoryId,
-      isComplete,
-    });
-    return id;
-  } catch (err) {
-    console.log(err);
-  }
+  await db.tasks.add({
+    description,
+    categoryId,
+    isComplete,
+  });
 };
 
 export const updateTask = async (
@@ -22,21 +17,19 @@ export const updateTask = async (
   description: string,
   isComplete: boolean
 ) => {
-  try {
-    await db.tasks.update(id, {
-      description,
-      isComplete,
-    });
-    return id;
-  } catch (err) {
-    console.log(err);
-  }
+  await db.tasks.update(id, {
+    description,
+    isComplete,
+  });
 };
 
 export const deleteTask = async (id: number) => {
-  try {
-    await db.tasks.delete(id);
-  } catch (err) {
-    console.log(err);
-  }
+  await db.tasks.delete(id);
+};
+
+export const createCategory = async (name: string, color: string) => {
+  await db.categories.add({
+    name,
+    color,
+  });
 };

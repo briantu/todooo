@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   VStack,
   HStack,
@@ -12,23 +12,36 @@ import {
 } from "@chakra-ui/react";
 import { CloseIcon } from "@chakra-ui/icons";
 
+import { hexToCSSFilter } from "hex-to-css-filter";
 import styles from "../../styles/CategoryCard.module.css";
 import taskStyles from "../../styles/TaskRow.module.css";
 
 import useOnPageLoad from "../../utils/useOnPageLoad";
-import { hexToCSSFilter } from "hex-to-css-filter";
+import { Category } from "../../db/db";
 
-const Category = () => {
+const CategoryCard = ({
+  category,
+  numTasks,
+}: {
+  category: Category;
+  numTasks: number;
+}) => {
   const [isHover, setIsHover] = useBoolean(false);
-  const [name, setName] = useState("Business");
+  const [name, setName] = useState(category.name);
   const [progressClassName, setProgressClassName] = useState("");
   const [progressValue, setProgressValue] = useState(0);
+
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   useOnPageLoad(() => {
     setProgressClassName(styles.progress);
     setProgressValue(60);
   });
 
+  if (!hasMounted) return null;
   return (
     <VStack
       w={48}
@@ -46,7 +59,7 @@ const Category = () => {
       onMouseLeave={setIsHover.off}
     >
       <Box w="full">
-        <Text textStyle="caption">40 tasks</Text>
+        <Text textStyle="caption">{numTasks} tasks</Text>
         <Input
           w="full"
           size="sm"
@@ -118,4 +131,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default CategoryCard;
