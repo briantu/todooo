@@ -69,7 +69,7 @@ const CreateTaskRow = ({
             <Circle
               size="28px"
               borderWidth="3px"
-              borderColor={selectedCategory.color}
+              borderColor={`category.${selectedCategory.color}`}
             />
             <ChevronDownIcon color="rgba(55, 53, 47, 0.9)" w="14px" />
           </HStack>
@@ -84,7 +84,11 @@ const CreateTaskRow = ({
               onClick={() => setSelectedCategory(cat)}
             >
               <HStack spacing={3}>
-                <Circle size="28px" borderWidth="3px" borderColor={cat.color} />
+                <Circle
+                  size="28px"
+                  borderWidth="3px"
+                  borderColor={`category.${cat.color}`}
+                />
                 <Text>{cat.name}</Text>
               </HStack>
             </MenuItem>

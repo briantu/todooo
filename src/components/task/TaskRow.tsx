@@ -34,7 +34,7 @@ const TaskRow = ({ task }: { task: TaskWithCategory }) => {
 
   useEffect(() => {
     if (isComplete) {
-      setCircleDecor({ bg: task.category.color, opacity: 0.3 });
+      setCircleDecor({ bg: `category.${task.category.color}`, opacity: 0.3 });
     } else {
       setCircleDecor(defaultCircleDecor);
     }
@@ -65,7 +65,7 @@ const TaskRow = ({ task }: { task: TaskWithCategory }) => {
       <Circle
         size="28px"
         borderWidth="3px"
-        borderColor={task.category.color}
+        borderColor={`category.${task.category.color}`}
         mr={3}
         sx={circleDecor}
         cursor="pointer"

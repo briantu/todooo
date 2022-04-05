@@ -81,22 +81,18 @@ const Todooo = () => {
                   category: {
                     id: 1,
                     name: "Business",
-                    color: "#1f5ebe",
+                    color: "red",
                   },
                 }}
               />
             ))}
-            <CreateTaskRow
-              categories={[
-                { id: 1, name: "Business", color: "category.blue" },
-                { id: 2, name: "Personal", color: "category.purple" },
-                { id: 3, name: "Personal", color: "category.pink" },
-                { id: 4, name: "Personal", color: "category.teal" },
-                { id: 5, name: "Personal", color: "category.green" },
-              ]}
-              isCreating={isCreatingTask}
-              setIsCreating={setIsCreatingTask}
-            />
+            {categories && (
+              <CreateTaskRow
+                categories={categories}
+                isCreating={isCreatingTask}
+                setIsCreating={setIsCreatingTask}
+              />
+            )}
             <Box px={2} py="2px">
               <CreateTaskButton
                 isCreating={isCreatingTask}
