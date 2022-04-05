@@ -17,7 +17,7 @@ export interface TaskWithCategory {
   id?: number;
   description: string;
   isComplete: boolean;
-  category: Category;
+  category: Category | undefined;
 }
 
 export class MySubClassedDexie extends Dexie {

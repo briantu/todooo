@@ -20,13 +20,14 @@ import { createCategory } from "../db/service";
 
 const Todooo = () => {
   const [isCreatingTask, setIsCreatingTask] = useBoolean(false);
+  const [numCategories, setNumCategories] = useState(0);
+
   const tasks = useLiveQuery(async () => {
     return await db.tasks.toArray();
   });
   const categories = useLiveQuery(async () => {
     return await db.categories.toArray();
   });
-  const [numCategories, setNumCategories] = useState(0);
 
   useEffect(() => {
     if (categories) {
@@ -75,14 +76,8 @@ const Todooo = () => {
               <TaskRow
                 key={task.id}
                 task={{
-                  id: task.id,
-                  description: task.description,
-                  isComplete: task.isComplete,
-                  category: {
-                    id: 1,
-                    name: "Business",
-                    color: "red",
-                  },
+                  ...task,
+                  category: categories?.find((c) => c.id === task.categoryId),
                 }}
               />
             ))}
