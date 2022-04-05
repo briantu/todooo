@@ -10,12 +10,12 @@ import {
   useBoolean,
 } from "@chakra-ui/react";
 import CategoryCard from "./category/CategoryCard";
+import CreateCategoryButton from "./category/CreateCategoryButton";
 import TaskRow from "./task/TaskRow";
 import CreateTaskRow from "./task/CreateTaskRow";
 import CreateTaskButton from "./task/CreateTaskButton";
 
 import { db } from "../db/db";
-import CreateCategoryButton from "./category/CreateCategoryButton";
 import { createCategory } from "../db/service";
 
 const Todooo = () => {
@@ -61,7 +61,10 @@ const Todooo = () => {
                 <CategoryCard
                   key={category.id}
                   category={category}
-                  numTasks={40}
+                  tasks={
+                    tasks?.filter((task) => task.categoryId === category.id) ||
+                    []
+                  }
                   numCategories={numCategories}
                 />
               ))}

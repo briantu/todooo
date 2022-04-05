@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   VStack,
   HStack,
@@ -13,36 +13,44 @@ import {
 import CategoryColorButton from "./CategoryColorButton";
 
 import { hexToCSSFilter } from "hex-to-css-filter";
-import styles from "../../styles/CategoryCard.module.css";
 import taskStyles from "../../styles/TaskRow.module.css";
 
-import useOnPageLoad from "../../utils/useOnPageLoad";
-import { Category } from "../../db/db";
+import { Category, Task } from "../../db/db";
 import { updateCategory, deleteCategory } from "../../db/service";
 
 const CategoryCard = ({
   category,
-  numTasks,
+  tasks,
   numCategories,
 }: {
   category: Category;
-  numTasks: number;
+  tasks: Task[];
   numCategories: number;
 }) => {
   const [isHover, setIsHover] = useBoolean(false);
   const [name, setName] = useState(category.name);
-  const [progressClassName, setProgressClassName] = useState("");
   const [progressValue, setProgressValue] = useState(0);
-
+  const didProgressMount = useRef(false);
   const [hasMounted, setHasMounted] = useState(false);
+
+  const updateProgressValue = () =>
+    setProgressValue(
+      Math.floor(
+        (tasks.filter((task) => task.isComplete).length / tasks.length) * 100
+      )
+    );
+
   useEffect(() => {
     setHasMounted(true);
+    setTimeout(() => {
+      updateProgressValue();
+      didProgressMount.current = true;
+    }, 10);
   }, []);
 
-  useOnPageLoad(() => {
-    setProgressClassName(styles.progress);
-    setProgressValue(60);
-  });
+  useEffect(() => {
+    if (didProgressMount.current) updateProgressValue();
+  }, [tasks]);
 
   if (!hasMounted) return null;
   return (
@@ -62,7 +70,7 @@ const CategoryCard = ({
       onMouseLeave={setIsHover.off}
     >
       <Box w="full">
-        <Text textStyle="caption">{numTasks} tasks</Text>
+        <Text textStyle="caption">{tasks.length} tasks</Text>
         <Input
           w="full"
           size="sm"
@@ -80,26 +88,29 @@ const CategoryCard = ({
         />
         <Box w="full" position="relative">
           <Box
-            w={!progressValue ? 0 : `calc(${progressValue}% - 4px)`}
             position="absolute"
             top="3px"
+            w={!progressValue ? 0 : `calc(${progressValue}% - 4px)`}
+            transition="width 0.8s"
+            transitionTimingFunction="ease-in-out"
           >
-            <Divider
-              borderRadius="md"
-              boxShadow={category.color}
-              className={progressClassName}
-            />
+            <Divider borderRadius="md" boxShadow={category.color} />
           </Box>
           <Box w="full" bg="gray.200" borderRadius="md" position="absolute">
-            <Progress
-              value={progressValue}
-              w="full"
-              size="xs"
-              bg="gray.200"
+            <Box
+              w={`${progressValue}%`}
               borderRadius="md"
-              variant={category.color}
-              className={progressClassName}
-            />
+              transition="width 0.8s"
+              transitionTimingFunction="ease-in-out"
+            >
+              <Progress
+                value={100}
+                size="xs"
+                bg="gray.200"
+                borderRadius="md"
+                variant={category.color}
+              />
+            </Box>
           </Box>
         </Box>
       </Box>

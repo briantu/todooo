@@ -32,12 +32,15 @@ const CreateTaskRow = ({
   isCreating,
   setIsCreating,
 }: CreateTaskRowProps) => {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [selectedCategory, setSelectedCategory] = useState<Category>();
   const elemInput = useRef<HTMLInputElement>(null);
   const resetTask = () => {
     setSelectedCategory(categories[0]);
     elemInput.current!.value = "";
   };
+  useEffect(() => {
+    resetTask();
+  }, []);
   useEffect(() => {
     if (!isCreating) {
       resetTask();
@@ -69,7 +72,9 @@ const CreateTaskRow = ({
             <Circle
               size="28px"
               borderWidth="3px"
-              borderColor={`category.${selectedCategory.color}`}
+              borderColor={`category.${
+                selectedCategory ? selectedCategory.color : "blue"
+              }`}
             />
             <ChevronDownIcon color="rgba(55, 53, 47, 0.9)" w="14px" />
           </HStack>
@@ -110,7 +115,7 @@ const CreateTaskRow = ({
         ml="auto"
         variant="new-task"
         onClick={() => {
-          createTask(elemInput.current!.value, selectedCategory.id!, false);
+          createTask(elemInput.current!.value, selectedCategory!.id!, false);
           setIsCreating.off();
         }}
       >
