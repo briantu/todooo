@@ -16,6 +16,14 @@ const colors = {
   hover: {
     button: "rgba(55, 53, 47, 0.08)",
   },
+  category: {
+    red: "#d50000",
+    yellow: "#F6BF26",
+    green: "#299438",
+    blue: "#206bde",
+    teal: "#33c2cc",
+    pink: "#da00e6",
+  },
 };
 
 export default colors;
