@@ -34,6 +34,17 @@ export const createCategory = async (name: string, color: string) => {
   });
 };
 
+export const updateCategory = async (
+  id: number,
+  name: string,
+  color: string
+) => {
+  await db.categories.update(id, {
+    name,
+    color,
+  });
+};
+
 export const deleteCategory = async (id: number) => {
   await db.categories.delete(id);
 };

@@ -31,7 +31,7 @@ const Todooo = () => {
   useEffect(() => {
     if (categories) {
       const n = categories.length;
-      if (n === 0) createCategory("New Category", "red");
+      if (n === 0) createCategory("New category", "blue");
       setNumCategories(categories.length);
     }
   }, [categories]);
@@ -88,8 +88,11 @@ const Todooo = () => {
             ))}
             <CreateTaskRow
               categories={[
-                { id: 1, name: "Business", color: "#1f5ebe" },
-                { id: 2, name: "Personal", color: "#da00e6" },
+                { id: 1, name: "Business", color: "category.blue" },
+                { id: 2, name: "Personal", color: "category.purple" },
+                { id: 3, name: "Personal", color: "category.pink" },
+                { id: 4, name: "Personal", color: "category.teal" },
+                { id: 5, name: "Personal", color: "category.green" },
               ]}
               isCreating={isCreatingTask}
               setIsCreating={setIsCreatingTask}

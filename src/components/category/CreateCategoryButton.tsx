@@ -11,7 +11,7 @@ const CreateCategoryButton = () => {
       p={0}
       borderRadius="full"
       onClick={() => {
-        createCategory("New category", "Red");
+        createCategory("New category", "blue");
       }}
     >
       <AddIcon boxSize="14px" />

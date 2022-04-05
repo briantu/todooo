@@ -10,6 +10,7 @@ import {
   Divider,
   useBoolean,
 } from "@chakra-ui/react";
+import CategoryColorButton from "./CategoryColorButton";
 
 import { hexToCSSFilter } from "hex-to-css-filter";
 import styles from "../../styles/CategoryCard.module.css";
@@ -17,7 +18,7 @@ import taskStyles from "../../styles/TaskRow.module.css";
 
 import useOnPageLoad from "../../utils/useOnPageLoad";
 import { Category } from "../../db/db";
-import { deleteCategory } from "../../db/service";
+import { updateCategory, deleteCategory } from "../../db/service";
 
 const CategoryCard = ({
   category,
@@ -75,9 +76,7 @@ const CategoryCard = ({
           onInput={(e) => {
             setName((e.target as HTMLInputElement).value);
           }}
-          // onBlur={() => {
-          //   updateTask(task.id!, text, isComplete);
-          // }}
+          onBlur={() => updateCategory(category.id!, name, category.color)}
         />
         <Box w="full" position="relative">
           <Box
@@ -87,7 +86,7 @@ const CategoryCard = ({
           >
             <Divider
               borderRadius="md"
-              boxShadow="1px 1px 9px 2px rgba(218, 0, 230, 0.4)"
+              boxShadow={category.color}
               className={progressClassName}
             />
           </Box>
@@ -98,7 +97,7 @@ const CategoryCard = ({
               size="xs"
               bg="gray.200"
               borderRadius="md"
-              variant="pink"
+              variant={category.color}
               className={progressClassName}
             />
           </Box>
@@ -113,14 +112,7 @@ const CategoryCard = ({
         spacing="6px"
         className={isHover ? taskStyles.iconFadeIn : taskStyles.iconFadeOut}
       >
-        <Image
-          src="/icons/color-picker-svgrepo.svg"
-          h="15px"
-          cursor="pointer"
-          filter={hexToCSSFilter("#a5aec0").filter}
-          transition="filter 0.3s"
-          _hover={{ filter: hexToCSSFilter("#7985a0").filter }}
-        />
+        <CategoryColorButton category={category} isHover={isHover} />
         <Image
           src="/icons/icons8-trash-can.svg"
           h="17px"
