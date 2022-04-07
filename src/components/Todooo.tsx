@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import {
   Container,
@@ -7,8 +7,12 @@ import {
   HStack,
   Box,
   Text,
+  Link,
+  Image,
   useBoolean,
 } from "@chakra-ui/react";
+import { hexToCSSFilter } from "hex-to-css-filter";
+
 import CategoryCard from "./category/CategoryCard";
 import CreateCategoryButton from "./category/CreateCategoryButton";
 import TaskRow from "./task/TaskRow";
@@ -48,6 +52,7 @@ const Todooo = () => {
           bg="brand.200"
           borderRadius={20}
           boxShadow="xl"
+          position="relative"
         >
           <Text textStyle="heading" mt={4}>
             Welcome Back!
@@ -98,6 +103,25 @@ const Todooo = () => {
               />
             </Box>
           </VStack>
+          <HStack
+            position="absolute"
+            bottom={0}
+            right={0}
+            spacing="4px"
+            pb="4px"
+            pr="10px"
+          >
+            <Text textStyle="caption" fontSize="11px">
+              Made by Brian Tu, on
+            </Text>
+            <Link href="https://github.com/briantu/todooo" isExternal>
+              <Image
+                src="/GitHub-Mark-32px.png"
+                h="14px"
+                filter={hexToCSSFilter("#333").filter}
+              />
+            </Link>
+          </HStack>
         </VStack>
       </Flex>
     </Container>
