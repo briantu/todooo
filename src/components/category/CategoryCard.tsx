@@ -33,19 +33,24 @@ const CategoryCard = ({
   const didProgressMount = useRef(false);
   const [hasMounted, setHasMounted] = useState(false);
 
-  const updateProgressValue = () =>
+  const updateProgressValue = () => {
+    const numCompleteTasks = tasks.filter((task) => task.isComplete).length;
     setProgressValue(
-      Math.floor(
-        (tasks.filter((task) => task.isComplete).length / tasks.length) * 100
-      )
+      !numCompleteTasks
+        ? 3
+        : Math.floor(
+            (tasks.filter((task) => task.isComplete).length / tasks.length) *
+              100
+          )
     );
+  };
 
   useEffect(() => {
     setHasMounted(true);
     setTimeout(() => {
       updateProgressValue();
       didProgressMount.current = true;
-    }, 10);
+    }, 100);
   }, []);
 
   useEffect(() => {
@@ -56,6 +61,7 @@ const CategoryCard = ({
   return (
     <VStack
       w={48}
+      minW={48}
       px={5}
       pt={5}
       pb="20px"
