@@ -11,6 +11,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  useBoolean,
 } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 
@@ -33,14 +34,18 @@ const CreateTaskRow = ({
   setIsCreating,
 }: CreateTaskRowProps) => {
   const [selectedCategory, setSelectedCategory] = useState<Category>();
+  const [isCategoriesLoaded, setIsCategoriesLoaded] = useBoolean(false);
   const elemInput = useRef<HTMLInputElement>(null);
   const resetTask = () => {
     setSelectedCategory(categories[0]);
     elemInput.current!.value = "";
   };
   useEffect(() => {
-    resetTask();
-  }, []);
+    if (categories.length && !isCategoriesLoaded) {
+      resetTask();
+      setIsCategoriesLoaded.on();
+    }
+  }, [categories]);
   useEffect(() => {
     if (!isCreating) {
       resetTask();
