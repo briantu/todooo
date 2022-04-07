@@ -50,7 +50,7 @@ const CategoryCard = ({
     setTimeout(() => {
       updateProgressValue();
       didProgressMount.current = true;
-    }, 10);
+    }, 100);
   }, []);
 
   useEffect(() => {
@@ -61,6 +61,7 @@ const CategoryCard = ({
   return (
     <VStack
       w={48}
+      minW={48}
       px={5}
       pt={5}
       pb="20px"

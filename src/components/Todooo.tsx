@@ -33,6 +33,11 @@ const Todooo = () => {
     return await db.categories.toArray();
   });
 
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
   useEffect(() => {
     // If first time user, populate db with new category
     const isFirstTime = localStorage.getItem("isFirstTime");
@@ -46,6 +51,7 @@ const Todooo = () => {
     if (categories) setNumCategories(categories.length);
   }, [categories]);
 
+  if (!hasMounted) return null;
   return (
     <Container maxW="container.xl" p={0} position="absolute">
       <Flex h="100vh" py={10}>
@@ -62,11 +68,11 @@ const Todooo = () => {
           <Text textStyle="heading" mt={4}>
             Welcome Back!
           </Text>
-          <VStack spacing="5px" alignItems="flex-start">
+          <VStack spacing="5px" alignItems="flex-start" w="full">
             <Text textStyle="body-heading" mb={2}>
               Categories
             </Text>
-            <HStack spacing={2}>
+            <HStack spacing={2} w="full" overflow="auto">
               {categories?.map((category) => (
                 <CategoryCard
                   key={category.id}
@@ -81,32 +87,45 @@ const Todooo = () => {
               <CreateCategoryButton />
             </HStack>
           </VStack>
-          <VStack w="full" spacing="5px" alignItems="flex-start">
+          <VStack
+            w="full"
+            h="full"
+            spacing="5px"
+            alignItems="flex-start"
+            overflow="auto"
+          >
             <Text textStyle="body-heading" mb={2}>
               Today's tasks
             </Text>
-            {tasks?.map((task) => (
-              <TaskRow
-                key={task.id}
-                task={{
-                  ...task,
-                  category: categories?.find((c) => c.id === task.categoryId),
-                }}
-              />
-            ))}
-            {categories && (
-              <CreateTaskRow
-                categories={categories}
-                isCreating={isCreatingTask}
-                setIsCreating={setIsCreatingTask}
-              />
-            )}
-            <Box px={2} py="2px">
-              <CreateTaskButton
-                isCreating={isCreatingTask}
-                setIsCreating={setIsCreatingTask}
-              />
-            </Box>
+            <VStack
+              w="full"
+              spacing="5px"
+              alignItems="flex-start"
+              overflow="auto"
+            >
+              {tasks?.map((task) => (
+                <TaskRow
+                  key={task.id}
+                  task={{
+                    ...task,
+                    category: categories?.find((c) => c.id === task.categoryId),
+                  }}
+                />
+              ))}
+              {categories && (
+                <CreateTaskRow
+                  categories={categories}
+                  isCreating={isCreatingTask}
+                  setIsCreating={setIsCreatingTask}
+                />
+              )}
+              <Box px={2} py="2px">
+                <CreateTaskButton
+                  isCreating={isCreatingTask}
+                  setIsCreating={setIsCreatingTask}
+                />
+              </Box>
+            </VStack>
           </VStack>
           <HStack
             position="absolute"
@@ -119,7 +138,11 @@ const Todooo = () => {
             <Text textStyle="caption" fontSize="11px">
               Made by Brian Tu, on
             </Text>
-            <Link href="https://github.com/briantu/todooo" isExternal>
+            <Link
+              href="https://github.com/briantu/todooo"
+              _focus={{ outline: "none", boxShadow: "none" }}
+              isExternal
+            >
               <Image
                 src="/GitHub-Mark-32px.png"
                 h="14px"
