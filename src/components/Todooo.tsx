@@ -34,11 +34,16 @@ const Todooo = () => {
   });
 
   useEffect(() => {
-    if (categories) {
-      const n = categories.length;
-      if (n === 0) createCategory("New category", "blue");
-      setNumCategories(categories.length);
+    // If first time user, populate db with new category
+    const isFirstTime = localStorage.getItem("isFirstTime");
+    if (!isFirstTime) {
+      createCategory("New category", "blue");
+      localStorage.setItem("isFirstTime", "true");
     }
+  }, []);
+
+  useEffect(() => {
+    if (categories) setNumCategories(categories.length);
   }, [categories]);
 
   return (
